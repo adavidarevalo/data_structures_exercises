@@ -1,56 +1,62 @@
-function priorityQueue() {
-    const items = [];
-
-    this.enqueue = (element, priority = 1) => {
-        let added = false;
-        items.forEach((item, index) => {
-            if (item.priority < priority && added === false) {
-                items.splice(index, 0, { element, priority })
-                added = true
-            }
-        })
-        if (added === false) {
-            items.push({ element, priority })
-        }
-    }
-    this.dequeue = () => {
-        return items.shift()
-    }
-
-    this.front = () => {
-        return items[0]
-    }
-
-    this.hasElements = () => {
-        return items.length > 0
-    }
-
-    this.size = () => {
-        return items.length
-    }
-
-    this.print = () => {
-        let printStr = ""
-        let pipe = "|"
-
-        items.forEach((item, index) => {
-            if (index === items.length - 1) {
-                pipe = ""
-            }
-            printStr += `${item.element}-${item.priority}${pipe}`
-
-        })
-        return printStr
-    }
-
-    this.clear = () => {
-        items = []
+class Nodo {
+    constructor(value, priority) {
+        this.next = null
+        this.value = value
+        this.priority = priority
     }
 }
 
-const Queue = new priorityQueue()
+class PriorityQueue {
+    head = null;
+    length = 0;
+
+    enqueue(value, priority = 1) {
+        let newNode = new Nodo(value, priority)
+
+        let ref = this.head
+
+        if (ref === null) {
+            this.head = newNode
+            this.length++
+            return;
+        }
+        let test = true;
+        while (test) {
+            if (!!ref?.next === false) {
+                ref.next = newNode
+                this.length++
+                return;
+
+            }
+            if (ref.priority >= newNode.priority) {
+                const t = ref.next
+                ref.next = newNode
+                ref.next.next = t
+                this.length++
+                return;
+            }
+            ref = ref.next
+        }
+
+    }
+    print() {
+        return JSON.stringify(this.head)
+    }
+}
+
+const Queue = new PriorityQueue()
 
 Queue.enqueue(1, 1)
+Queue.enqueue(2, 2)
+Queue.enqueue(1, 1)
+Queue.enqueue(3, 3)
+Queue.enqueue(3, 3)
+Queue.enqueue(3, 3)
+Queue.enqueue(1, 1)
+Queue.enqueue(2, 2)
+Queue.enqueue(2, 2)
+Queue.enqueue(1, 1)
+Queue.enqueue(2, 2)
 Queue.enqueue(2, 2)
 Queue.enqueue(3, 3)
 
