@@ -1,5 +1,87 @@
 function List() {
     this.head = null;
+    this.add = function (value) {
+        if (this.head === null) {
+            this.head = new Nodo(value);
+            return
+        }
+        let ref = this.head
+        while (!!ref.next) {
+            ref = ref.next;
+        }
+        ref.next = new Nodo(value)
+    }
+    this.search = function (value) {
+        let ref = this.head
+
+        while (!!ref.value) {
+            if (ref.value === value) return true
+
+            ref = ref.next;
+        }
+        return false
+    }
+    this.combine = function (list1, list2) {
+        const listResult = new List();
+
+        let ref1 = list1.head;
+        let ref2 = list2.head;
+
+        while (!!ref2) {
+            listResult.add(ref1.value)
+            listResult.add(ref2.value)
+            ref1 = ref1.next;
+            ref2 = ref2.next;
+        }
+
+        return listResult
+    }
+    this.update = function (value, newValue) {
+        let ref = this.head
+
+        while (!!ref?.value) {
+            if (ref.value === value) {
+                ref.value = newValue
+                return true
+            }
+            ref = ref.next;
+        }
+        return false
+    }
+    this.updateNodo = function (value, nodo) {
+        let ref = this.head
+
+        while (!!ref.value) {
+            if (ref.value === value) {
+                const ref2 = ref.next.next
+                ref = nodo
+                ref.next = ref2
+                return true
+            }
+            ref = ref.next;
+        }
+        return false
+    }
+    this.length = function () {
+        let ref = this.head
+        let counter = 0;
+
+        while (!!ref?.value) {
+            counter++
+            ref = ref.next;
+        }
+        return counter
+    }
+    this.getNode = function (value) {
+        let ref = this.head
+
+        while (!!ref.value) {
+            if (ref.value === value) return ref
+
+            ref = ref.next;
+        }
+        return false
+    }
 }
 
 function Nodo(value) {
@@ -7,95 +89,95 @@ function Nodo(value) {
     this.next = null
 }
 
-List.prototype.add = function (value) {
-    if (this.head === null) {
-        this.head = new Nodo(value);
-        return
-    }
-    let ref = this.head
-    while (!!ref.next) {
-        ref = ref.next;
-    }
-    ref.next = new Nodo(value)
-}
+// List.prototype.add = function (value) {
+//     if (this.head === null) {
+//         this.head = new Nodo(value);
+//         return
+//     }
+//     let ref = this.head
+//     while (!!ref.next) {
+//         ref = ref.next;
+//     }
+//     ref.next = new Nodo(value)
+// }
 
-List.prototype.search = function (value) {
-    let ref = this.head
+// List.prototype.search = function (value) {
+//     let ref = this.head
 
-    while (!!ref.value) {
-        if (ref.value === value) return true
+//     while (!!ref.value) {
+//         if (ref.value === value) return true
 
-        ref = ref.next;
-    }
-    return false
-}
+//         ref = ref.next;
+//     }
+//     return false
+// }
 
-List.prototype.combine = function (list1, list2) {
-    const listResult = new List();
+// List.prototype.combine = function (list1, list2) {
+//     const listResult = new List();
 
-    let ref1 = list1.head;
-    let ref2 = list2.head;
+//     let ref1 = list1.head;
+//     let ref2 = list2.head;
 
-    while (!!ref2) {
-        listResult.add(ref1.value)
-        listResult.add(ref2.value)
-        ref1 = ref1.next;
-        ref2 = ref2.next;
-    }
+//     while (!!ref2) {
+//         listResult.add(ref1.value)
+//         listResult.add(ref2.value)
+//         ref1 = ref1.next;
+//         ref2 = ref2.next;
+//     }
 
-    return listResult
-}
+//     return listResult
+// }
 
-List.prototype.update = function (value, newValue) {
-    let ref = this.head
+// List.prototype.update = function (value, newValue) {
+//     let ref = this.head
 
-    while (!!ref?.value) {
-        if (ref.value === value) {
-            ref.value = newValue
-            return true
-        }
-        ref = ref.next;
-    }
-    return false
-}
+//     while (!!ref?.value) {
+//         if (ref.value === value) {
+//             ref.value = newValue
+//             return true
+//         }
+//         ref = ref.next;
+//     }
+//     return false
+// }
 
-List.prototype.updateNodo = function (value, nodo) {
-    let ref = this.head
+// List.prototype.updateNodo = function (value, nodo) {
+//     let ref = this.head
 
-    while (!!ref.value) {
-        if (ref.value === value) {
-            const ref2 = ref.next.next
-            ref = nodo
-            ref.next = ref2
-            return true
-        }
-        ref = ref.next;
-    }
-    return false
-}
+//     while (!!ref.value) {
+//         if (ref.value === value) {
+//             const ref2 = ref.next.next
+//             ref = nodo
+//             ref.next = ref2
+//             return true
+//         }
+//         ref = ref.next;
+//     }
+//     return false
+// }
 
-List.prototype.length = function () {
-    let ref = this.head
-    let counter = 0;
+// List.prototype.length = function () {
+//     let ref = this.head
+//     let counter = 0;
 
-    while (!!ref?.value) {
-        counter++
-        ref = ref.next;
-    }
-    return counter
-}
+//     while (!!ref?.value) {
+//         counter++
+//         ref = ref.next;
+//     }
+//     return counter
+// }
 
 
-List.prototype.getNode = function (value) {
-    let ref = this.head
+// List.prototype.getNode = function (value) {
+//     let ref = this.head
 
-    while (!!ref.value) {
-        if (ref.value === value) return ref
+//     while (!!ref.value) {
+//         if (ref.value === value) return ref
 
-        ref = ref.next;
-    }
-    return false
-}
+//         ref = ref.next;
+//     }
+//     return false
+// }
 
 
 const list1 = new List();
