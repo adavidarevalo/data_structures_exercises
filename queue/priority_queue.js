@@ -20,19 +20,21 @@ class PriorityQueue {
             this.length++
             return;
         }
-        let test = true;
-        while (test) {
+        let isFindingNode = true;
+        while (isFindingNode) {
             if (!!ref?.next === false) {
                 ref.next = newNode
                 this.length++
+                isFindingNode = false
                 return;
 
             }
             if (ref.priority >= newNode.priority) {
-                const t = ref.next
+                const postNode = ref.next
                 ref.next = newNode
-                ref.next.next = t
+                ref.next.next = postNode
                 this.length++
+                isFindingNode = false
                 return;
             }
             ref = ref.next
